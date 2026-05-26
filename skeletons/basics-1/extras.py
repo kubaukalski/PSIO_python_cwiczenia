@@ -70,3 +70,62 @@ def append_and_sort(lst: List[str]) -> List[str]:
     """Utwórz kopię listy wejściowej, dodaj do niej element 'abc', a na koniec
         zwróć jej elementy posortowane w porządku alfabetycznym (rosnącym).
     """
+    pass
+
+
+def ints_to_str(lst: List[int]) -> str:
+    """Sklej listę liczb (całkowitych) w jeden łańcuch znaków.
+
+    W implementacji skorzystaj z metody str.join(), list comprehension oraz
+    z funkcji wbudowanej str().
+
+    Przykład: ints_to_str([11, 33, 50]) = '113350'
+
+    :param lst: lista liczb całkowitych
+    :return: łańcuch znaków powstały ze "sklejenia" elementów przekazanej listy
+    """
+    pass
+
+
+def ints_to_str_max_length(lst: List[int], max_length: Optional[int] = None) -> str:
+    """Sklej listę liczb w jeden łańcuch znaków o ustalonej maksymalnej długości.
+
+    Argument domyślny dla `max_length` to None, co oznacza, że nie ma ograniczenia
+    na maksymalną długość wynikowego łańcucha znaków.
+
+    W implementacji wywołaj funkcję `ints_to_str()`.
+
+    Przykład:
+        ints_to_str_max_length([11, 33]) = '1133'
+        ints_to_str_max_length([11, 33], 3) = '113'
+
+    :param lst: lista liczb całkowitych
+    :param max_length: maksymalna długość łańcucha znaków po "sklejeniu"
+    :return: łańcuch znaków powstały ze "sklejenia" elementów przekazanej listy
+    """
+    pass
+
+
+def division_guardian(x: float, y: float) -> bool:
+    """Sprawdź, czy stosunek x/y jest większy niż 1.
+
+    Implementacja powinna zawierać wyłącznie instrukcję `return`.
+    W wyrażeniu logicznym skorzystaj wyłącznie z operatora AND (zastosuj
+    mechanizm "short-circuting").
+
+    :param x: liczba zmiennoprzecinkowa
+    :param y: liczba zmiennoprzecinkowa
+    :return: True jeśli x/y > 1 (dla y różnego od 0), False gdy y = 0 lub gdy
+        x/y < 1
+    """
+    pass
+
+
+def f_compose(f: Callable[[float], float], x0: float) -> float:
+    """Zwróć wynik złożenia ("matematycznej") funkcji `f` z samą sobą (tj. f²(x)).
+
+    :param f: funkcja R ↦ R
+    :param x0: liczba rzeczywista (x0 ∈ R)
+    :return: wartość f²(x0)
+    """
+    pass
