@@ -10,20 +10,10 @@ from typing import Dict, Any, List, Tuple, Optional, Set
 
 
 def dict_intro() -> None:
-    """Rozgrzewka: tworzenie i wypisywanie słownika.
+    dict = {"Adam": 2 , "Bogdan": 4, "Cezary": 1}
 
-    Utwórz w jednej instrukcji słownik {str -> int} zawierający następujące
-    pary klucz-wartość: Adam=2, Bogdan=4, Cezary=1.
-    Następnie wypisz całą zawartość słownika, po jednym wpisie w każdym wierszu.
-
-    Przykładowo (kolejność wpisów może się różnić od poniższej):
-      Adam = 2
-      Bogdan = 4
-      Cezary = 1
-
-    (zob. "test" w pliku test/test_dict_intro.py)
-    """
-    pass
+    for k, v in dict.items():
+        print(k, "=", v)
 
 
 # Alias `Menu` na typ `Dict[str, float]` poprawia czytelność kodu
@@ -32,104 +22,72 @@ Menu = Dict[str, float]
 
 
 def update_price(menu: Menu, dish: str) -> None:
-    """Zwiększ wartość skojarzoną z kluczem `dish` w słowniku `menu` o 50.
-
-    :param menu: menu, które należy zaktualizować
-    :param dish: danie, którego cena powinna zostać zmieniona
-    """
-    pass
+    menu[dish] += 50
 
 
 def fix_key(dct: Dict[str, Any], incorrect_key: str, correct_key: str) -> Dict[str, Any]:
-    """Skoryguj ewentualny błędny klucz w słowniku.
 
-    Utwórz kopię słownika wejściowego `dct` i jeśli słownik ten zawiera błędy
-    klucz `incorrect_key`, wówczas przepisz (w kopii) jego wartość do nowego
-    ("poprawnego") klucza `correct_key` oraz usuń błędny klucz.
+    #tym mozna kopiowac slownik
+    rep = dict(dct)
+    if incorrect_key in rep:
+        rep[correct_key] = rep[incorrect_key]
+        del rep[incorrect_key]
+    return rep
 
-    W implementacji nie twórz nowego słownika "od zera", tylko skorzystaj
-      z funkcjonalności kopiowania wbudowanej w język Python!
-
-    :param dct: słownik, który (potencjalnie) należy skorygować
-    :param incorrect_key: błędny klucz (do poprawy)
-    :param correct_key: poprawny klucz, który powinien zastąpić błędny klucz
-    :return: poprawny słownik (KOPIA słownika wejściowego z poprawionym kluczem)
-    """
-    pass
 
 
 def update_all_prices(menu: Menu) -> None:
-    """Zwiększ każdą z wartości w słowniku `menu` o 50.
-
-    :param menu: menu, które należy zaktualizować
-    """
-    pass
-
+    for dish in menu:
+        menu[dish] += 50
 
 # TODO: Zdefiniuj alias `ClassRegister` na typ umożliwiający przechowywanie
 #   informacji o ocenach poszczególnych uczniów, tj. mapowanie nazwy
 #   ucznia na listę ocen (będących liczbami zmiennoprzecinkowymi).
-ClassRegister = None
+ClassRegister = Dict[str,List[float]]
 
 
 def average_grades_1(register: ClassRegister) -> Dict[str, float]:
-    """Oblicz średnią dla każdego ucznia.
-
-    Przyjmij, że każdy uczeń ma co najmniej jedną ocenę.
-
-    :param register: dziennik ocen
-    :return: mapowanie nazwy ucznia na średnią jego ocen
-    """
-    pass
+    av_dict = dict(register)
+    for student, grades in register.items() :
+        av_dict[student]=sum(grades)/len(grades)
+    return av_dict
+    
 
 
-# [OPT]
 def average_grades_2(register: ClassRegister) -> Dict[str, Optional[float]]:
-    """Oblicz średnią dla każdego ucznia.
-
-    Jeśli uczeń nie posiada ani jednej oceny, przyjmij że średnia wynosi None.
-
-    :param register: dziennik ocen
-    :return: mapowanie nazwy ucznia na średnią jego ocen (albo None, jeśli
-        dany uczeń nie posiada ocen)
-    """
-    pass
+    av_dict = {} 
+    for student, grades in register.items() :
+        if grades :
+            av_dict[student]=sum(grades)/len(grades)
+        else: 
+            av_dict[student]= None
+    return av_dict
+    
 
 
 def letters_frequencies(s: str) -> Dict[str, int]:
-    """Zwróć zestawienie częstości występowania poszczególnych liter w danym słowie.
-
-    :param s: łańcuch znaków, dla którego obliczana jest częstość wystąpień liter
-    :return: mapowanie litery na częstość jej występowania
-    """
-    pass
-
+    litery = list(s)
+    freq = {}
+    for i in litery:   #nawet wystarczy char in s w pythonei
+        if i not in freq:
+            freq[i] = 0
+        freq[i] += 1
+    return freq
 
 def letters_frequency_2(s: str) -> Tuple[Dict[str, int], int]:
-    """Zwróć zestawienie częstości występowania poszczególnych liter w danym słowie
-    ORAZ liczbę unikalnych liter.
-
-    W implemnetacji wywołaj funkcję `letters_frequencies()`.
-
-    :param s: łańcuch znaków, dla którego obliczane są statystyki
-    :return: 2-elementowa krotka złożona ze słownika częstości występowania
-        poszczególnych liter oraz z liczby unikalnych liter
-    """
-    pass
+    return (letters_frequencies(s), len(letters_frequencies(s).keys()))
 
 
 def census(register: Dict[str, Dict[str, Any]]) -> Tuple[Dict[str, int], float]:
-    """Wyznacz liczbę osób z poszczególnych państw oraz średni wiek wszystkich osób.
-
-    Przyjmij, że rejestr zawiera dane choć jednej osoby oraz że informacje
-    w słowniku są poprawne (nie ma brakujących kluczy itd.).
-
-    :param register: spis osób w formacie {N: {'address': {'country': C}, 'age': A}
-        gdzie N - nazwa osoby; C - państwo, z którego osoba pochodzi; A - wiek osoby
-    :return: 2-elementowa krotka złożona ze słownika opisującego liczbę osób
-        z poszczególnych państw oraz ze średniego wieku wszystkich osób
-    """
-    pass
+    freq = {}
+    for _, dane in register.items(): # '_' uzywa sie do oznaczenia param ktorego nie uzywam
+        country = dane['address']['country']
+        if country not in freq:
+            freq[country] = 0
+        freq[country]+= 1
+        av_age = sum(register[d]['age'] for d in register)/len(register) 
+        #jak chcialem dac len(dane) to sie nie zgadzalo bo 
+    return freq, av_age
 
 
 # lista zakupowa - mapowanie nazwy produktu na liczbę sztuk (do kupienia)
@@ -137,35 +95,22 @@ ShoppingList = Dict[str, int]
 
 
 def sum_shopping_lists(list1: ShoppingList, list2: ShoppingList) -> ShoppingList:
-    """Scal dwie listy zakupowe w jedną.
-
-    :param list1: pierwsza lista zakupowa
-    :param list2: druga lista zakupowa
-    :return: scalone listy zakupowe
-    """
-    pass
+    lista_c = dict(list1)
+    for i in list2 : 
+        if i not in list1 : 
+            lista_c[i] = 0
+        lista_c[i] += list2[i]
+    return lista_c
 
 
 def sum_shopping_lists_nonempty(list1: ShoppingList, list2: ShoppingList) -> ShoppingList:
-    """Scal dwie listy zakupowe w jedną, z pominięciem produktów o krotności 0.
-
-    W implementacji wywołaj funkcję `sum_shopping_lists()`.
-
-    :param list1: pierwsza lista zakupowa
-    :param list2: druga lista zakupowa
-    :return: scalone listy zakupowe
-    """
-    pass
-
+    lista_c = sum_shopping_lists(list1, list2)
+    for product in lista_c :
+        if lista_c[product] == 0:
+            del lista_c[product]
+    return lista_c
 
 def filter_pesels_by_name_initial(persons: Dict[str, str], name_initial: str) -> Set[str]:
-    """Zwróć zbiór PESEL-i osób, których imię zaczyna się zadaną literę.
+    return {pesel for pesel, name in persons.items() if name[0]==name_initial}
 
-    Implementacja powinna zawierać wyłącznie instrukcję `return`.
-    W rozwiązaniu użyj set comprehension.
-
-    :param persons: baza osób {PESEL -> osoba}
-    :param name_initial: inicjał imienia użyty do filtrowania
-    :return: zbiór PESEL-i osób
-    """
-    pass
+print("__file__", __file__)

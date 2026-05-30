@@ -34,11 +34,6 @@ Menu = Dict[str, float]
 
 
 def update_price(menu: Menu, dish: str) -> None:
-    """Zwiększ wartość skojarzoną z kluczem `dish` w słowniku `menu` o 50.
-
-    :param menu: menu, które należy zaktualizować
-    :param dish: danie, którego cena powinna zostać zmieniona
-    """
     menu[dish] += 50
 
 
